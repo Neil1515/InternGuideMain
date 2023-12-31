@@ -1,5 +1,6 @@
+<!-- header.php -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <body>
     <header>
@@ -8,11 +9,12 @@
             <h3>InternGuide</h3>
         </div>
         <nav>
-            <ul>
-                <li><a href="#">My Profile</a></li>
-                <li><a href="\InternGuide\index.php">Logout</a></li>
+            <ul class="header">
+                <li><a href="#"> <img src="images/profile-user.png" alt="Profile" class="profile-icon">My Profile</a></li>
+                <li><a href="\InternGuide\index.php"> <img src="images/logouticon.png" alt="Logout" class="logout-icon">Logout</a></li>
             </ul>
         </nav>
     </header>
 </body>
 </html>
+

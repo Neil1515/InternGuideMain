@@ -1,3 +1,4 @@
+<!-- functions.php -->
 <?php
 // Initialize the loginError variable
 $loginError = false;
