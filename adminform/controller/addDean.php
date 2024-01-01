@@ -13,7 +13,6 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate and sanitize form data (add validation logic)
-
     // Collect form data
     $deanId = $_POST['deanId'];
     $fname = $_POST['fname'];
@@ -27,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Image handling (add logic for file uploads)
     $image = $_FILES['image']['name'];
     $image_tmp = $_FILES['image']['tmp_name'];
-    move_uploaded_file($image_tmp, "images/$image");
 
     // Check if the ID is already taken
     $checkIdQuery = "SELECT * FROM tbldean WHERE id = '$deanId'";
@@ -35,7 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         // In case of an error
+        header('Content-Type: application/json');
         echo json_encode(array("error" => "ID already taken. Please choose a different ID."));
+        exit; // Terminate the script
     } else {
         // ID is not taken, proceed with inserting data
         $sql = "INSERT INTO tbldean (id, fname, lname, department, password, status, image) 
@@ -43,14 +43,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($conn->query($sql) === TRUE) {
             // In case of success
+            header('Content-Type: application/json');
             echo json_encode(array("success" => "Dean added successfully"));
         } else {
             // In case of an error
-            echo json_encode(array("error" => "Error: " . $sql . "<br>" . $conn->error));
+            header('Content-Type: application/json');
+            echo json_encode(array("error" => "Error adding dean. Please try again later."));
         }
+
+        exit; // Terminate the script
     }
 }
 
 $conn->close();
 ?>
-

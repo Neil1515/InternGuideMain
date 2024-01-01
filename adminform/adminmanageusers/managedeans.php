@@ -50,7 +50,7 @@ $conn->close();
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
 
-        <form id="addDeanForm" method="post" enctype="multipart/form-data">
+        <form id="addDeanForm" method="post" enctype="multipart/form-data" onsubmit="submitDeanForm(); return false;">
             <!-- Form fields go here -->
             <h2>ADD DEAN DETAILS</h2>
             <div class="form-group">
@@ -74,7 +74,7 @@ $conn->close();
             
             <!-- Add other form fields as needed -->
             <div class="form-group">
-                <button type="submit" onclick="submitDeanForm()">Submit</button>
+                <button type="submit">Submit</button>
             </div>
         </form>
     </div>

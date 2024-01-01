@@ -11,6 +11,7 @@ function showHomepage() {
         }
     };
     xhr.open("GET", "adminView/adminhomepage.php", true);
+    xhr.open("GET", "includes/adminstyles.css", true);
     xhr.send();
 }
 
@@ -26,6 +27,7 @@ function showManageUsers() {
         }
     };
     xhr.open("GET", "adminView/adminmanageusers.php", true);
+    xhr.open("GET", "includes/adminstyles.css", true);
     xhr.send();
 }
 
@@ -42,6 +44,7 @@ function showManageAccount() {
          }
      };
      xhr.open("GET", "adminView/adminmanageaccount.php", true);
+     xhr.open("GET", "includes/adminstyles.css", true);
      xhr.send();
 }
 
@@ -57,5 +60,6 @@ function showManageDepartment() {
          }
      };
      xhr.open("GET", "adminView/adminmanagedepartment.php", true);
+     xhr.open("GET", "includes/adminstyles.css", true);
      xhr.send();
 }

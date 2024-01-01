@@ -82,17 +82,7 @@ function closeModal() {
 // Function to submit the dean form
 function submitDeanForm() {
     // Collect form data
-    var deanId = document.getElementById('deanId').value;
-    var fname = document.getElementById('fname').value;
-    var lname = document.getElementById('lname').value;
-    var department = document.getElementById('department').value;
-    var image = document.getElementById('image').value;
-
-    // Check if any field is empty
-    if (!deanId || !fname || !lname || !department || !image) {
-        alert("Please fill in all details.");
-        return;
-    }
+    console.log("submitDeanForm called");
 
     // Create FormData and submit the form
     var formData = new FormData(document.getElementById('addDeanForm'));
@@ -100,6 +90,7 @@ function submitDeanForm() {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
+            console.log("Response from server:", xhr.responseText);  // Log the response
             if (xhr.status == 200) {
                 try {
                     var response = JSON.parse(xhr.responseText);
@@ -108,6 +99,7 @@ function submitDeanForm() {
                         alert(response.error);
                     } else {
                         closeModal();  // Close the modal on success
+                        resetForm();   // Reset the form fields
                     }
                 } catch (error) {
                     console.error("Error parsing JSON response: " + error);
@@ -123,6 +115,11 @@ function submitDeanForm() {
     xhr.send(formData);
 }
 
+
+// Function to reset the form fields
+function resetForm() {
+    document.getElementById('addDeanForm').reset();
+}
 
 function editDean(deanId) {
   // Logic for editing dean with the given ID
