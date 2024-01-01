@@ -68,4 +68,63 @@ function showUserDetails(userType) {
             console.log("Unknown user type");
     }
 }
+  
+ // Function to open the modal
+function openModal() {
+    document.getElementById("addDeanModal").style.display = "block";
+}
 
+// Function to close the modal
+function closeModal() {
+    document.getElementById("addDeanModal").style.display = "none";
+}
+
+// Function to submit the dean form
+function submitDeanForm() {
+    // Collect form data
+    var deanId = document.getElementById('deanId').value;
+    var fname = document.getElementById('fname').value;
+    var lname = document.getElementById('lname').value;
+    var department = document.getElementById('department').value;
+    var image = document.getElementById('image').value;
+
+    // Check if any field is empty
+    if (!deanId || !fname || !lname || !department || !image) {
+        alert("Please fill in all details.");
+        return;
+    }
+
+    // Create FormData and submit the form
+    var formData = new FormData(document.getElementById('addDeanForm'));
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+
+                    if (response.error) {
+                        alert(response.error);
+                    } else {
+                        closeModal();  // Close the modal on success
+                    }
+                } catch (error) {
+                    console.error("Error parsing JSON response: " + error);
+                }
+            } else {
+                // If there was an error, show an alert
+                alert("Error: " + xhr.responseText);
+            }
+        }
+    };
+
+    xhr.open("POST", "controller\\addDean.php", true);
+    xhr.send(formData);
+}
+
+
+function editDean(deanId) {
+  // Logic for editing dean with the given ID
+  console.log("Edit dean with ID: " + deanId);
+}
